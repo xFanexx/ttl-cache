@@ -17,6 +17,15 @@ import {LRUList} from '../node/lru-node';
  *
  * @template K - The type of keys in the cache
  * @template V - The type of values in the cache
+ * 
+ * @DE
+ * Die Least Recently Used (LRU) Cache-Implementierung mit optionaler TTL-Unterstützung.
+ *
+ * Der Cache entfernt automatisch die am längsten nicht verwendeten Einträge, wenn die maximale
+ * Größe erreicht wird. Einträge können auch basierend auf einer konfigurierbaren TTL ablaufen.
+ *
+ * @template K - Der Typ der Schlüssel im Cache
+ * @template V - Der Typ der Werte im Cache
  *
  * @example
  * ```typescript
@@ -65,6 +74,13 @@ export class LRUCache<K, V> {
      * @param options - Configuration options for the cache
      * @throws {Error} If useCollection is true but discord.js is not installed
      * @throws {Error} If neither maxSize nor maxMemoryBytes is specified
+     * 
+     * @DE
+     * Erstellt eine neue LRU-Cache-Instanz.
+     *
+     * @param options - Konfigurationsoptionen für den Cache
+     * @throws {Error} Wenn useCollection true ist, aber discord.js nicht installiert ist
+     * @throws {Error} Wenn weder maxSize noch maxMemoryBytes angegeben ist
      */
     constructor(options: LRUCacheOptions) {
         if (!options.maxSize && !options.maxMemoryBytes) {
@@ -99,6 +115,13 @@ export class LRUCache<K, V> {
      * This property automatically prunes expired entries before returning the count.
      *
      * @returns The number of valid entries in the cache
+     * 
+     * @DE
+     * Gibt die aktuelle Anzahl der Einträge im Cache zurück, ohne abgelaufene Einträge.
+     *
+     * Diese Eigenschaft räumt automatisch abgelaufene Einträge auf, bevor die Anzahl zurückgegeben wird.
+     *
+     * @returns Die Anzahl der gültigen Einträge im Cache
      *
      * @example
      * ```typescript
@@ -115,6 +138,12 @@ export class LRUCache<K, V> {
      *
      * @param json - Serialized cache data
      * @returns New cache instance
+     * 
+     * @DE
+     * Erstelle Cache aus serialisierten JSON-Daten.
+     *
+     * @param json - Serialisierte Cache-Daten
+     * @returns Neue Cache-Instanz
      *
      * @example
      * ```typescript
@@ -152,6 +181,15 @@ export class LRUCache<K, V> {
      *
      * @param key - The key to set
      * @param value - The value to cache
+     * 
+     * @DE
+     * Fügt einen Eintrag im Cache hinzu oder aktualisiert ihn mit Standard-TTL.
+     *
+     * Wenn der Schlüssel bereits existiert, wird sein Wert aktualisiert und er wird als zuletzt verwendet markiert.
+     * Wenn der Cache die maximale Kapazität erreicht hat, wird der am längsten nicht verwendete Eintrag entfernt.
+     *
+     * @param key - Der zu setzende Schlüssel
+     * @param value - Der zu cachende Wert
      *
      * @example
      * ```typescript
@@ -168,6 +206,13 @@ export class LRUCache<K, V> {
      * @param key - The key to set
      * @param value - The value to cache
      * @param customTTL - Custom TTL in milliseconds (undefined for no expiry)
+     * 
+     * @DE
+     * Fügt einen Eintrag im Cache hinzu oder aktualisiert ihn mit benutzerdefinierter TTL.
+     *
+     * @param key - Der zu setzende Schlüssel
+     * @param value - Der zu cachende Wert
+     * @param customTTL - Benutzerdefinierte TTL in Millisekunden (undefined für kein Ablaufen)
      *
      * @example
      * ```typescript
@@ -225,6 +270,15 @@ export class LRUCache<K, V> {
      *
      * @param key - The key to retrieve
      * @returns The cached value, or undefined if not found or expired
+     * 
+     * @DE
+     * Holt einen Wert aus dem Cache.
+     *
+     * Beim Zugriff auf einen Schlüssel wird er als zuletzt verwendet markiert. Wenn der Eintrag abgelaufen ist,
+     * wird er automatisch entfernt und undefined zurückgegeben.
+     *
+     * @param key - Der abzurufende Schlüssel
+     * @returns Der gecachte Wert, oder undefined wenn nicht gefunden oder abgelaufen
      *
      * @example
      * ```typescript
@@ -270,6 +324,12 @@ export class LRUCache<K, V> {
      *
      * @param key - The key to peek at
      * @returns The cached value, or undefined if not found or expired
+     * 
+     * @DE
+     * Holt einen Wert ohne LRU-Reihenfolge oder TTL zu aktualisieren.
+     *
+     * @param key - Der Schlüssel zum Reinschauen
+     * @returns Der gecachte Wert, oder undefined wenn nicht gefunden oder abgelaufen
      *
      * @example
      * ```typescript
@@ -299,6 +359,12 @@ export class LRUCache<K, V> {
      *
      * @param key - The key to check
      * @returns True if the key exists and is valid, false otherwise
+     * 
+     * @DE
+     * Überprüft, ob ein Schlüssel im Cache existiert und nicht abgelaufen ist.
+     *
+     * @param key - Der zu prüfende Schlüssel
+     * @returns True wenn der Schlüssel existiert und gültig ist, sonst false
      *
      * @example
      * ```typescript
@@ -332,6 +398,12 @@ export class LRUCache<K, V> {
      *
      * @param key - The key to remove
      * @returns True if the entry was removed, false if it didn't exist
+     * 
+     * @DE
+     * Entfernt einen Eintrag aus dem Cache.
+     *
+     * @param key - Der zu entfernende Schlüssel
+     * @returns True wenn der Eintrag entfernt wurde, false wenn er nicht existierte
      *
      * @example
      * ```typescript
@@ -349,6 +421,9 @@ export class LRUCache<K, V> {
 
     /**
      * Removes all entries from the cache.
+     * 
+     * @DE
+     * Entfernt alle Einträge aus dem Cache.
      *
      * @example
      * ```typescript
@@ -367,6 +442,12 @@ export class LRUCache<K, V> {
      *
      * @param key - The key to check
      * @returns Remaining TTL in milliseconds, or null if key doesn't exist or has no expiry
+     * 
+     * @DE
+     * Hole verbleibende TTL für einen Schlüssel in Millisekunden.
+     *
+     * @param key - Der zu prüfende Schlüssel
+     * @returns Verbleibende TTL in Millisekunden, oder null wenn Schlüssel nicht existiert oder kein Ablaufen hat
      *
      * @example
      * ```typescript
@@ -394,6 +475,13 @@ export class LRUCache<K, V> {
      * @param key - The key to update
      * @param ttl - New TTL in milliseconds (undefined for no expiry)
      * @returns True if the entry was updated, false if it doesn't exist
+     * 
+     * @DE
+     * Aktualisiere TTL für einen Eintrag ohne seinen Wert zu ändern.
+     *
+     * @param key - Der zu aktualisierende Schlüssel
+     * @param ttl - Neue TTL in Millisekunden (undefined für kein Ablaufen)
+     * @returns True wenn der Eintrag aktualisiert wurde, false wenn er nicht existiert
      *
      * @example
      * ```typescript
@@ -422,6 +510,13 @@ export class LRUCache<K, V> {
      * @param key - The key to get or compute
      * @param computeFn - Function to compute the value if not cached
      * @returns The cached or computed value
+     * 
+     * @DE
+     * Hole oder berechne einen Wert, wenn er nicht im Cache ist.
+     *
+     * @param key - Der zu holende oder berechnende Schlüssel
+     * @param computeFn - Funktion zum Berechnen des Werts, wenn er nicht gecacht ist
+     * @returns Der gecachte oder berechnete Wert
      *
      * @example
      * ```typescript
@@ -453,6 +548,11 @@ export class LRUCache<K, V> {
      * Set multiple entries at once.
      *
      * @param entries - Array of [key, value] tuples
+     * 
+     * @DE
+     * Setze mehrere Einträge auf einmal.
+     *
+     * @param entries - Array von [Schlüssel, Wert] Tupeln
      *
      * @example
      * ```typescript
@@ -473,6 +573,12 @@ export class LRUCache<K, V> {
      *
      * @param keys - Array of keys to retrieve
      * @returns Map of found entries
+     * 
+     * @DE
+     * Hole mehrere Einträge auf einmal.
+     *
+     * @param keys - Array von Schlüsseln zum Abrufen
+     * @returns Map der gefundenen Einträge
      *
      * @example
      * ```typescript
@@ -495,6 +601,12 @@ export class LRUCache<K, V> {
      *
      * @param keys - Array of keys to peek at
      * @returns Map of found entries
+     * 
+     * @DE
+     * Schau dir mehrere Einträge an ohne LRU zu aktualisieren.
+     *
+     * @param keys - Array von Schlüsseln zum Reinschauen
+     * @returns Map der gefundenen Einträge
      *
      * @example
      * ```typescript
@@ -517,6 +629,12 @@ export class LRUCache<K, V> {
      *
      * @param keys - Array of keys to delete
      * @returns Number of entries deleted
+     * 
+     * @DE
+     * Lösche mehrere Einträge auf einmal.
+     *
+     * @param keys - Array von Schlüsseln zum Löschen
+     * @returns Anzahl der gelöschten Einträge
      *
      * @example
      * ```typescript
@@ -536,6 +654,12 @@ export class LRUCache<K, V> {
      *
      * @param keys - Array of keys to check
      * @returns Map of key existence status
+     * 
+     * @DE
+     * Prüfe Existenz mehrerer Schlüssel.
+     *
+     * @param keys - Array von Schlüsseln zum Prüfen
+     * @returns Map des Schlüssel-Existenz-Status
      *
      * @example
      * ```typescript
@@ -555,6 +679,12 @@ export class LRUCache<K, V> {
      *
      * @param pattern - Regular expression pattern
      * @returns Number of entries deleted
+     * 
+     * @DE
+     * Lösche Einträge, die einem Muster entsprechen (für String-Schlüssel).
+     *
+     * @param pattern - Regular Expression Muster
+     * @returns Anzahl der gelöschten Einträge
      *
      * @example
      * ```typescript
@@ -582,6 +712,11 @@ export class LRUCache<K, V> {
      * Filter cache entries by predicate.
      *
      * @param predicate - Function to test each entry
+     * 
+     * @DE
+     * Filtere Cache-Einträge nach Prädikat.
+     *
+     * @param predicate - Funktion zum Testen jedes Eintrags
      *
      * @example
      * ```typescript
@@ -608,6 +743,13 @@ export class LRUCache<K, V> {
      * Expired entries are automatically pruned before iteration.
      *
      * @returns An iterator of cache keys
+     * 
+     * @DE
+     * Gibt einen Iterator aller Schlüssel im Cache zurück.
+     *
+     * Abgelaufene Einträge werden automatisch vor der Iteration entfernt.
+     *
+     * @returns Ein Iterator der Cache-Schlüssel
      *
      * @example
      * ```typescript
@@ -627,6 +769,13 @@ export class LRUCache<K, V> {
      * Expired entries are automatically pruned before iteration.
      *
      * @returns An iterator of cache values
+     * 
+     * @DE
+     * Gibt einen Iterator aller Werte im Cache zurück.
+     *
+     * Abgelaufene Einträge werden automatisch vor der Iteration entfernt.
+     *
+     * @returns Ein Iterator der Cache-Werte
      *
      * @example
      * ```typescript
@@ -670,6 +819,13 @@ export class LRUCache<K, V> {
      * Expired entries are automatically pruned before iteration.
      *
      * @returns An iterator of [key, value] tuples
+     * 
+     * @DE
+     * Gibt einen Iterator aller Schlüssel-Wert-Paare im Cache zurück.
+     *
+     * Abgelaufene Einträge werden automatisch vor der Iteration entfernt.
+     *
+     * @returns Ein Iterator von [Schlüssel, Wert] Tupeln
      *
      * @example
      * ```typescript
@@ -710,6 +866,13 @@ export class LRUCache<K, V> {
      * Expired entries are automatically pruned before iteration.
      *
      * @param callback - Function to execute for each entry
+     * 
+     * @DE
+     * Führt eine bereitgestellte Funktion einmal für jeden Cache-Eintrag aus.
+     *
+     * Abgelaufene Einträge werden automatisch vor der Iteration entfernt.
+     *
+     * @param callback - Funktion, die für jeden Eintrag ausgeführt wird
      *
      * @example
      * ```typescript
@@ -731,6 +894,11 @@ export class LRUCache<K, V> {
      * Get cache statistics.
      *
      * @returns Cache statistics object
+     * 
+     * @DE
+     * Hole Cache-Statistiken.
+     *
+     * @returns Cache-Statistik-Objekt
      *
      * @example
      * ```typescript
@@ -755,6 +923,9 @@ export class LRUCache<K, V> {
 
     /**
      * Reset cache statistics.
+     * 
+     * @DE
+     * Setze Cache-Statistiken zurück.
      *
      * @example
      * ```typescript
@@ -770,6 +941,12 @@ export class LRUCache<K, V> {
      *
      * @param event - Event type
      * @param callback - Callback function
+     * 
+     * @DE
+     * Registriere einen Event-Listener.
+     *
+     * @param event - Event-Typ
+     * @param callback - Callback-Funktion
      *
      * @example
      * ```typescript
@@ -793,6 +970,12 @@ export class LRUCache<K, V> {
      *
      * @param event - Event type
      * @param callback - Callback function to remove
+     * 
+     * @DE
+     * Entferne einen Event-Listener.
+     *
+     * @param event - Event-Typ
+     * @param callback - Callback-Funktion zum Entfernen
      *
      * @example
      * ```typescript
@@ -816,6 +999,11 @@ export class LRUCache<K, V> {
      * Serialize cache to JSON.
      *
      * @returns Serialized cache data
+     * 
+     * @DE
+     * Serialisiere Cache zu JSON.
+     *
+     * @returns Serialisierte Cache-Daten
      *
      * @example
      * ```typescript
@@ -843,6 +1031,9 @@ export class LRUCache<K, V> {
 
     /**
      * Dispose of the cache and cleanup resources.
+     * 
+     * @DE
+     * Entsorge den Cache und räume Ressourcen auf.
      *
      * @example
      * ```typescript

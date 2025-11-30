@@ -2,6 +2,11 @@
  * Node in the doubly linked list for O(1) LRU operations
  *
  * @template K - The type of keys in the cache
+ * 
+ * @DE
+ * Node in der doppelt verketteten Liste für O(1) LRU-Operationen
+ *
+ * @template K - Der Typ der Schlüssel im Cache
  */
 export class LRUNode<K> {
     key: K;
@@ -17,6 +22,11 @@ export class LRUNode<K> {
  * Doubly linked list for efficient LRU tracking
  *
  * @template K - The type of keys in the cache
+ * 
+ * @DE
+ * Doppelt verkettete Liste für effizientes LRU-Tracking
+ *
+ * @template K - Der Typ der Schlüssel im Cache
  */
 export class LRUList<K> {
     private head: LRUNode<K> | null = null;
@@ -26,6 +36,9 @@ export class LRUList<K> {
 
     /**
      * Get the current size of the list
+     * 
+     * @DE
+     * Hole die aktuelle Größe der Liste
      */
     get size(): number {
         return this._size;
@@ -33,6 +46,9 @@ export class LRUList<K> {
 
     /**
      * Add a key to the end of the list (most recently used)
+     * 
+     * @DE
+     * Füge einen Schlüssel ans Ende der Liste hinzu (zuletzt verwendet)
      */
     push(key: K): void {
         if (this.nodeMap.has(key)) {
@@ -58,6 +74,9 @@ export class LRUList<K> {
 
     /**
      * Move a key to the end of the list (most recently used)
+     * 
+     * @DE
+     * Verschiebe einen Schlüssel ans Ende der Liste (zuletzt verwendet)
      */
     moveToEnd(key: K): void {
         const node = this.nodeMap.get(key);
@@ -91,6 +110,9 @@ export class LRUList<K> {
 
     /**
      * Remove the least recently used key (head of list)
+     * 
+     * @DE
+     * Entferne den am längsten nicht verwendeten Schlüssel (Kopf der Liste)
      */
     shift(): K | undefined {
         if (!this.head) {
@@ -104,6 +126,9 @@ export class LRUList<K> {
 
     /**
      * Remove a specific key from the list
+     * 
+     * @DE
+     * Entferne einen spezifischen Schlüssel aus der Liste
      */
     remove(key: K): boolean {
         const node = this.nodeMap.get(key);
@@ -131,6 +156,9 @@ export class LRUList<K> {
 
     /**
      * Check if a key exists in the list
+     * 
+     * @DE
+     * Prüfe ob ein Schlüssel in der Liste existiert
      */
     has(key: K): boolean {
         return this.nodeMap.has(key);
@@ -138,6 +166,9 @@ export class LRUList<K> {
 
     /**
      * Clear all nodes from the list
+     * 
+     * @DE
+     * Lösche alle Nodes aus der Liste
      */
     clear(): void {
         this.head = null;
@@ -148,6 +179,9 @@ export class LRUList<K> {
 
     /**
      * Get all keys in order (LRU to MRU)
+     * 
+     * @DE
+     * Hole alle Schlüssel in Reihenfolge (LRU zu MRU)
      */
     keys(): K[] {
         const keys: K[] = [];

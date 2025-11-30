@@ -8,6 +8,15 @@ import type {CacheEntry} from './types';
  * @param expiry - Unix timestamp (in milliseconds) when this entry expires
  * @param size - Optional size in bytes
  * @returns A new cache entry
+ * 
+ * @DE
+ * Erstellt einen neuen Cache-Eintrag mit dem gegebenen Wert und Ablaufzeit.
+ *
+ * @template V - Der Typ des gecachten Werts
+ * @param value - Der zu cachende Wert
+ * @param expiry - Unix-Zeitstempel (in Millisekunden), wann dieser Eintrag abläuft
+ * @param size - Optionale Größe in Bytes
+ * @returns Ein neuer Cache-Eintrag
  *
  * @example
  * ```typescript
@@ -33,6 +42,13 @@ export function createCacheEntry<V>(
  * @template V - The type of the cached value
  * @param entry - The cache entry to check
  * @returns True if the entry has expired, false otherwise
+ * 
+ * @DE
+ * Überprüft, ob ein Cache-Eintrag abgelaufen ist.
+ *
+ * @template V - Der Typ des gecachten Werts
+ * @param entry - Der zu prüfende Cache-Eintrag
+ * @returns True wenn der Eintrag abgelaufen ist, sonst false
  *
  * @example
  * ```typescript
@@ -51,6 +67,13 @@ export function isCacheEntryExpired<V>(entry: CacheEntry<V>): boolean {
  * @template V - The type of the cached value
  * @param entry - The cache entry to check
  * @returns The remaining TTL in milliseconds, or Infinity if the entry has no expiry
+ * 
+ * @DE
+ * Gibt die verbleibende Lebenszeit für einen Cache-Eintrag in Millisekunden zurück.
+ *
+ * @template V - Der Typ des gecachten Werts
+ * @param entry - Der zu prüfende Cache-Eintrag
+ * @returns Die verbleibende TTL in Millisekunden, oder Infinity wenn der Eintrag kein Ablaufen hat
  *
  * @example
  * ```typescript
@@ -71,6 +94,13 @@ export function getCacheEntryTTL<V>(entry: CacheEntry<V>): number {
  * @template V - The type of the cached value
  * @param entry - The cache entry to check
  * @returns The age in milliseconds
+ * 
+ * @DE
+ * Gibt das Alter eines Cache-Eintrags in Millisekunden zurück.
+ *
+ * @template V - Der Typ des gecachten Werts
+ * @param entry - Der zu prüfende Cache-Eintrag
+ * @returns Das Alter in Millisekunden
  *
  * @example
  * ```typescript

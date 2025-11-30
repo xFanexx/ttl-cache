@@ -7,6 +7,10 @@
  * @module @notkeira/ttl-cache
  * @licence MIT
  * @author Keira Hopkins
+ * 
+ * @DE
+ * Eine leichtgewichtige LRU (Least Recently Used) Cache-Implementierung mit optionaler
+ * TTL (Time To Live) Unterstützung und discord.js Collection Kompatibilität.
  *
  * @example
  * ```typescript

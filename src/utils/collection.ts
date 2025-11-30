@@ -6,6 +6,15 @@
  *
  * @returns The Collection class from discord.js
  * @throws {Error} If discord.js is not installed or Collection cannot be loaded
+ * 
+ * @DE
+ * Versucht die discord.js Collection Klasse zu laden.
+ *
+ * Diese Funktion importiert discord.js dynamisch und gibt die Collection Klasse zurück.
+ * Sie wird intern vom Cache verwendet, wenn `useCollection` auf true gesetzt ist.
+ *
+ * @returns Die Collection Klasse von discord.js
+ * @throws {Error} Wenn discord.js nicht installiert ist oder Collection nicht geladen werden kann
  *
  * @example
  * ```typescript
@@ -42,6 +51,11 @@ export function loadDiscordCollection(): typeof Map {
  * Checks if discord.js is available in the current environment.
  *
  * @returns True if discord.js is installed and can be loaded, false otherwise
+ * 
+ * @DE
+ * Überprüft, ob discord.js in der aktuellen Umgebung verfügbar ist.
+ *
+ * @returns True wenn discord.js installiert ist und geladen werden kann, sonst false
  *
  * @example
  * ```typescript
@@ -67,6 +81,14 @@ export function isDiscordAvailable(): boolean {
  * ensuring the Collection class exists and can be instantiated.
  *
  * @returns True if Collection is available and functional, false otherwise
+ * 
+ * @DE
+ * Validiert, dass discord.js Collection verfügbar und funktionsfähig ist.
+ *
+ * Dies führt eine gründlichere Prüfung als `isDiscordAvailable` durch,
+ * stellt sicher, dass die Collection Klasse existiert und instanziiert werden kann.
+ *
+ * @returns True wenn Collection verfügbar und funktionsfähig ist, sonst false
  *
  * @example
  * ```typescript
